@@ -1,7 +1,7 @@
 const app = require('express')();
 
 app.get('/', (req, res) => {
-  res.send('https://github.com/idhts2081/_NaverAPI');
+  res.send('https://github.com/idhts2081/naverme-api');
 });
 
 app.get('/shorten', async (req, res) => {
