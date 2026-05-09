@@ -1,7 +1,58 @@
-아래 형식의 주소로 요청을 보내 응답 json의 단축된 url을 추출하면 됩니다.<br>
-```https://naverme-shortener.vercel.app/shorten?url=[URL]``` [예시](https://naverme-shortener.vercel.app/shorten?url=https://github.com/idhts2081)
+## API
+### `GET /shorten`
 
-응답 형식
+Shortens a URL into the `naver.me` format.
+
+#### Query Parameters
+
+| Name  | Type   | Required | Description                 |
+| ----- | ------ | -------- | --------------------------- |
+| `url` | string | Yes      | The original URL to shorten |
+
+#### Example Request
+
+```txt
+GET /shorten?url=https://example.com
+```
+
+#### Example Response
+
 ```json
-{"result":{"data":"[단축된 url]"}}
+{
+  "result": {
+    "data": "https://naver.me/xxxxx"
+  }
+}
+```
+
+#### Error Response
+
+If the `url` query parameter is missing:
+
+```json
+{
+  "error": "url query is required"
+}
+```
+
+If the URL could not be shortened:
+
+```json
+{
+  "error": "Failed to shorten URL",
+  "detail": "Error message"
+}
+```
+
+## Usage
+
+Example using `fetch`:
+
+```js
+const response = await fetch(
+  'https://naverme-shortener.vercel.app/shorten?url=https://example.com'
+);
+
+const data = await response.json();
+console.log(data.result.data);
 ```
